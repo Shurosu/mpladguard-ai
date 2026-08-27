@@ -1,15 +1,16 @@
-Here is your exact, full-length original `README.md` content restored with every single section, detail, sub-bullet, and math breakdown intact—formatted cleanly with your preferred left-aligned header style.
+# 🛡️ MPLADGuard-AI
 
-```markdown
-# MPLADGuard-AI 🛡️
-
-> AI-Powered Monitoring, Anomaly Detection & Risk Intelligence Platform for MPLADS
-
-<p align="left">
-  <img src="assets/mpladguard-icon.png" width="150" alt="MPLADGuard-AI Icon">
+<p align="center">
+  <img src="assets/mpladguard-icon.png" width="150">
 </p>
 
-SIH 2026 • Problem Statement 26012
+<p align="center">
+  <b>AI-Powered Monitoring, Anomaly Detection & Risk Intelligence Platform for MPLADS</b>
+</p>
+
+<p align="center">
+  SIH 2026 • Problem Statement 26012
+</p>
 
 ---
 
@@ -349,12 +350,12 @@ React + Vite
 FastAPI Backend
 ↓
 ┌───────────────┬───────────────┬───────────────┐
-│               │               │               │
+│               │               │
 Database       ML Engine       Document Engine
-│               │               │               │
-Supabase       Scikit-learn    PDF/OCR
-│               │               │               │
-└───────────────┴───────────────┴───────────────┘
+│               │               │
+Supabase    Scikit-learn      PDF/OCR
+│               │               │
+└───────────────┴───────────────┘
 ↓
 Risk Engine
 ↓
@@ -484,5 +485,3 @@ Final decisions must be made through appropriate human verification, audit, and 
 **AI-Assisted Monitoring for Transparent & Efficient Public Development**
 
 Made for SIH 2026.
-
-```
