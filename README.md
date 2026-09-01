@@ -13,460 +13,474 @@
 </p>
 
 ---
+# 🛡️ MPLADGuard AI
 
-## 🎯 About
+### Backend Implementation & Project Monitoring Platform for MPLADS
 
-MPLADGuard-AI is an AI-powered platform designed to detect potential anomalies, fraud indicators, and inefficiencies in the implementation of the Members of Parliament Local Area Development Scheme (MPLADS).
+**MPLADGuard AI** is a project monitoring and risk-analysis platform designed to improve transparency, efficiency, and oversight in the implementation of the **Members of Parliament Local Area Development Scheme (MPLADS)**.
 
-The platform analyzes project, financial, execution, inspection, contractor, procurement, and document-related data to identify projects that may require further investigation.
+The platform is intended to analyze project, financial, execution, inspection, and progress-related information and identify projects that may require closer monitoring or human verification.
 
-> A high-risk score does not prove fraud. It indicates that the project requires further human verification.
-
----
-
-## 🚨 Problem
-
-MPLADS involves thousands of development projects implemented across different regions through multiple agencies and stakeholders.
-
-Manual monitoring makes it difficult to quickly identify:
-
-- Unusual project costs
-- Financial irregularities
-- Delayed projects
-- Fund utilization anomalies
-- Financial vs physical progress mismatch
-- Insufficient inspections
-- Unusual contractor patterns
-- Procurement anomalies
-- Document inconsistencies
-
-MPLADGuard-AI aims to make this monitoring process faster, smarter, and data-driven.
+> **Important:** A high-risk score does not prove fraud. It indicates that a project contains indicators that may require further investigation.
 
 ---
 
-## 💡 Solution
+## 👨‍💻 My Contribution
 
-MPLADGuard-AI combines:
+This fork contains my **backend implementation** developed during the SIH 2026 project.
 
-- 📊 Project & Financial Analytics
-- 🤖 AI-Based Anomaly Detection
-- ⚠️ Explainable Risk Scoring
-- 📄 Document Verification
-- 🗺️ Geospatial Monitoring
+My primary contribution was focused on designing and implementing the backend/API layer that connects project data with the application's frontend and risk-analysis workflow.
 
-### Basic Workflow
+### Backend Work
 
+* Designed the **FastAPI backend structure**
+* Developed REST API endpoints for project-related operations
+* Implemented request/response validation using **Pydantic**
+* Built backend data-processing services
+* Implemented project statistics and analytical endpoints
+* Developed the initial **risk-scoring logic**
+* Prepared the backend architecture for ML/anomaly-detection integration
+* Created an ML integration interface/stub for future model integration
+* Worked on backend ↔ frontend API integration
+* Structured the backend for future database and government-data integration
+
+### Repository Context
+
+This repository is my personal fork of the team's MPLADGuard AI project.
+
+The `feature/backend-api` branch contains the backend implementation I developed.
+
+The original team repository contains the team's final integrated implementation.
+
+---
+
+# 🚨 Problem
+
+MPLADS involves development projects across different regions, implementing agencies, contractors, and stakeholders.
+
+Large-scale manual monitoring can make it difficult to quickly identify projects that may require additional attention.
+
+Potential monitoring indicators include:
+
+* Unusual project costs
+* Significant project delays
+* Fund-utilization irregularities
+* Financial vs. physical progress mismatch
+* Insufficient inspections
+* Unusual execution patterns
+* Procurement-related anomalies
+* Inconsistent project information
+
+MPLADGuard AI aims to make this monitoring process more **data-driven, explainable, and efficient**.
+
+---
+
+# 💡 Solution
+
+The platform combines project monitoring, data processing, analytics, and risk assessment into a centralized system.
+
+### Core workflow
+
+```text
 Project Data
-↓
+     ↓
 Data Processing
-↓
-Feature Engineering
-↓
-Machine Learning
-↓
-Anomaly Detection
-↓
+     ↓
+Feature Calculation
+     ↓
+Risk Analysis
+     ↓
 Risk Score
-↓
-Explainable Results
-↓
+     ↓
+Explainable Indicators
+     ↓
 Dashboard
-↓
-Human Investigation
+     ↓
+Human Verification
+```
+
+The system is designed as a **decision-support platform**, rather than an automated fraud-detection authority.
 
 ---
 
-# 🚀 Key Features
+# ⚙️ Backend Architecture
 
-## 1. 📊 Monitoring Dashboard
+The backend is built around a REST API architecture using **FastAPI**.
 
-Centralized dashboard showing:
+```text
+                 React + Vite
+                     │
+                     │ REST API
+                     ▼
+              ┌──────────────┐
+              │    FastAPI   │
+              │    Backend   │
+              └──────┬───────┘
+                     │
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+      Project     Analytics   Risk Engine
+       Data          │           │
+          │          │           │
+          └──────────┼───────────┘
+                     ▼
+              API Responses
+                     │
+                     ▼
+                 Dashboard
+```
 
-- Total projects
-- Total sanctioned funds
-- Total utilized funds
-- Completed projects
-- Ongoing projects
-- Delayed projects
-- High-risk projects
-- Financial analytics
-- Risk distribution
-- Project statistics
-
----
-
-## 2. 🤖 AI Anomaly Detection
-
-The ML system analyzes project data and identifies unusual patterns.
-
-Important features include:
-
-- Estimated cost
-- Sanctioned amount
-- Released amount
-- Utilized amount
-- Actual expenditure
-- Planned duration
-- Actual duration
-- Delay
-- Physical progress
-- Financial progress
-- Inspection count
-- Contractor information
-- Procurement information
-
-The initial prototype uses an unsupervised anomaly detection approach such as **Isolation Forest**.
-
-### Example
-
-Estimated Cost: ₹20 Lakh  
-Actual Cost: ₹32 Lakh
-
-Planned Duration: 8 Months  
-Actual Duration: 17 Months
-
-Physical Progress: 45%  
-Financial Progress: 88%
-
-Inspection Count: 1
-
-↓
-
-**Risk Score: 87/100 — HIGH RISK**
+The backend is structured so that additional components such as databases, ML models, document-processing systems, and government datasets can be integrated later.
 
 ---
 
-## 3. 🔍 Explainable Risk Analysis
+# 🚀 Current Backend Features
 
-The system does not only provide a risk score.
+## 1. Project Data APIs
 
-It also explains the major factors responsible for the score.
+The backend provides API functionality for working with project-level information.
+
+Examples include:
+
+* Project retrieval
+* Project statistics
+* Project filtering
+* Project status information
+* Project-level analysis
+
+---
+
+## 2. Risk Scoring Engine
+
+A backend risk-scoring layer evaluates project indicators and produces a risk score that can be used to prioritize projects for closer monitoring.
+
+Potential indicators include:
+
+* Cost deviation
+* Fund utilization
+* Project delay
+* Financial progress
+* Physical progress
+* Progress mismatch
+* Inspection frequency
+* Other project-level indicators
 
 Example:
 
-- High cost deviation
-- Large project delay
-- Financial and physical progress mismatch
-- Low inspection frequency
-- Abnormal fund utilization
+```text
+Cost Deviation        → High
+Project Delay         → High
+Progress Mismatch     → Medium
+Inspection Frequency  → Low
 
-This makes the AI output easier for officials to understand.
+             ↓
 
----
+        Risk Score
+             ↓
 
-## 4. 📄 Document Verification
+       HIGH RISK
+```
 
-The platform can analyze project documents such as:
-
-- Work Orders
-- Administrative Sanctions
-- Technical Sanctions
-- Bills
-- Utilization Certificates
-- Completion Certificates
-- Inspection Reports
-
-Example:
-
-Document Amount: ₹28 Lakh  
-Database Amount: ₹22 Lakh
-
-→ Potential Financial Discrepancy
-
-The system flags the discrepancy for human verification.
+The score is intended to support **prioritization and human review**, not automatically determine wrongdoing.
 
 ---
 
-## 5. 🗺️ Geospatial Monitoring
+# 📊 Monitoring & Analytics
 
-Projects can be displayed on an interactive map.
+The platform can provide project-level and aggregate information such as:
 
-🟢 Low Risk  
-🟠 Medium Risk  
-🔴 High Risk
+* Total projects
+* Completed projects
+* Ongoing projects
+* Delayed projects
+* Project expenditure
+* Fund utilization
+* Risk distribution
+* Project statistics
+* Location-based information
 
-Each project can display:
-
-- Project name
-- Project type
-- Location
-- Cost
-- Completion status
-- Risk score
-- Risk indicators
+These APIs can be consumed by the frontend dashboard to create interactive monitoring and visualization components.
 
 ---
 
-# 🧠 Machine Learning
+# 🤖 ML Integration
 
-### ML Pipeline
+The current backend is structured to support future integration with machine-learning based anomaly detection.
 
-Raw Project Data
-↓
+A planned architecture is:
+
+```text
+Project Data
+     ↓
 Data Cleaning
-↓
+     ↓
 Feature Engineering
-↓
-Feature Matrix
-↓
-Isolation Forest
-↓
+     ↓
+ML Model
+     ↓
 Anomaly Score
-↓
+     ↓
 Risk Engine
-↓
-Explainable Risk Score
+     ↓
+Explainable Result
+```
 
-### Important Derived Features
+Possible future approaches include unsupervised anomaly-detection techniques such as **Isolation Forest**.
 
-Cost Deviation:
+### Important
 
-(actual_cost - estimated_cost) / estimated_cost
+The current backend should not be interpreted as a production fraud-detection system.
 
-Fund Utilization:
-
-utilized_amount / released_amount
-
-Progress Mismatch:
-
-financial_progress - physical_progress
-
-Delay Ratio:
-
-actual_duration / planned_duration
-
-Inspection Gap:
-
-days_since_last_inspection
-
-Cost Per Beneficiary:
-
-actual_cost / estimated_beneficiaries
+The ML integration is designed as an extensible component for future development and experimentation.
 
 ---
 
-# 📊 Dataset
+# 🧮 Risk Indicators
 
-The dataset can contain:
+The platform can derive analytical indicators from project data.
+
+### Cost Deviation
+
+```text
+(actual_cost - estimated_cost) / estimated_cost
+```
+
+### Fund Utilization
+
+```text
+utilized_amount / released_amount
+```
+
+### Progress Mismatch
+
+```text
+financial_progress - physical_progress
+```
+
+### Delay Ratio
+
+```text
+actual_duration / planned_duration
+```
+
+These indicators can be combined by the risk engine to help identify projects requiring additional attention.
+
+---
+
+# 📁 Dataset
+
+The prototype is designed to work with structured project data containing fields such as:
 
 ### Project Information
 
-- Project ID
-- Project Name
-- Project Type
-- Work Category
-- State
-- District
-- Constituency
-- Location
-- Latitude
-- Longitude
+* Project ID
+* Project Name
+* Project Type
+* Work Category
+* State
+* District
+* Constituency
+* Location
+* Latitude
+* Longitude
 
 ### Financial Information
 
-- Estimated Cost
-- Sanctioned Amount
-- Released Amount
-- Utilized Amount
-- Actual Cost
-- Number of Payments
+* Estimated Cost
+* Sanctioned Amount
+* Released Amount
+* Utilized Amount
+* Actual Cost
+* Number of Payments
 
 ### Timeline
 
-- Sanction Date
-- Work Order Date
-- Planned Completion Date
-- Actual Completion Date
-- Delay Days
+* Sanction Date
+* Work Order Date
+* Planned Completion Date
+* Actual Completion Date
+* Delay Days
 
 ### Progress
 
-- Physical Progress
-- Financial Progress
-- Work Status
+* Physical Progress
+* Financial Progress
+* Work Status
 
 ### Inspection
 
-- Inspection Count
-- Last Inspection Date
-- Issues Reported
-- Issues Resolved
+* Inspection Count
+* Last Inspection Date
+* Issues Reported
+* Issues Resolved
 
-### Contractor
+### Contractor / Agency
 
-- Implementing Agency
-- Contractor ID
-- Contractor Name
-- Contract Value
-
-### Procurement
-
-- Tender ID
-- Bid Count
-- Winning Bid
-- Second Lowest Bid
-- Procurement Method
-
-### Impact
-
-- Estimated Beneficiaries
-- Population Served
+* Implementing Agency
+* Contractor ID
+* Contractor Name
+* Contract Value
 
 ---
 
-# 🔄 Dataset Growth
+# 🧪 Prototype Data
 
-New verified project data can continuously be added.
+The current prototype uses **synthetic/sample data** for development and testing.
 
-10 Projects
-↓
-20 Projects
-↓
-30 Projects
-↓
-50 Projects
-↓
-100+ Projects
+The long-term objective is to integrate verified government datasets, including relevant datasets available through **data.gov.in**, subject to availability, format, licensing, and API/data-access conditions.
 
-When retraining the model, the accumulated dataset should be used.
-
-For example:
-
-Round 1 → Projects 1–10  
-Round 2 → Projects 1–20  
-Round 3 → Projects 1–30  
-...  
-Round 10 → Projects 1–100
-
-Different project categories such as bridges, roads, schools, and water infrastructure can use category-specific features because their normal cost and execution patterns are different.
-
----
-
-# 🏗️ Architecture
-
-Frontend
-React + Vite
-↓
-FastAPI Backend
-↓
-┌───────────────┬───────────────┬───────────────┐
-│               │               │
-Database       ML Engine       Document Engine
-│               │               │
-Supabase    Scikit-learn      PDF/OCR
-│               │               │
-└───────────────┴───────────────┘
-↓
-Risk Engine
-↓
-Dashboard
+This distinction is important because synthetic data is useful for validating the application's architecture and algorithms, but it should not be treated as official MPLADS data.
 
 ---
 
 # 🛠️ Technology Stack
 
-Frontend:
-- React
-- Vite
-- Tailwind CSS
-- Recharts
-- React Leaflet
+### Backend
 
-Backend:
-- Python
-- FastAPI
-- Pydantic
+* Python
+* FastAPI
+* Pydantic
 
-Machine Learning:
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Joblib
+### Data Processing
 
-Database:
-- PostgreSQL
-- Supabase
+* Pandas
+* NumPy
 
-Other:
-- Git
-- GitHub
-- OpenStreetMap
-- PDF/OCR tools
+### Machine Learning Integration
+
+* Scikit-learn
+* Joblib
+
+### Frontend
+
+* React
+* Vite
+* Tailwind CSS
+* Recharts
+* React Leaflet
+
+### Database / Future Integration
+
+* PostgreSQL
+* Supabase
+
+### Development
+
+* Git
+* GitHub
+* REST APIs
 
 ---
 
 # 📁 Project Structure
 
+```text
 mpladguard-ai/
-
-├── frontend/
+│
 ├── backend/
+│   ├── services/
+│   ├── routes/
+│   └── ...
+│
+├── frontend/
+│
 ├── ml/
+│
 ├── docs/
+│
 ├── tests/
+│
 ├── scripts/
+│
 ├── assets/
-│   └── mpladguard-icon.png
+│
 ├── .gitignore
+│
 └── README.md
+```
+
+> The exact structure may evolve as the project continues to develop.
 
 ---
 
-# 👥 Team Collaboration
+# 🔄 Development Workflow
 
-We follow:
+The project follows a Git-based collaborative workflow:
 
-Fork → Branch → Pull Request → Review → Merge
+```text
+Fork
+  ↓
+Feature Branch
+  ↓
+Development
+  ↓
+Commit
+  ↓
+Push
+  ↓
+Pull Request
+  ↓
+Review
+  ↓
+Merge
+```
 
-The main branch remains stable.
-
-Each team member works on their own fork or feature branch and submits a Pull Request before changes are merged into the main repository.
+This repository preserves my backend development work separately from the final team implementation.
 
 ---
 
 # 🎯 MVP
 
-Our initial MVP focuses on:
+The broader MPLADGuard AI MVP focuses on:
 
-- [ ] Project & Financial Dashboard
-- [ ] AI Anomaly Detection
-- [ ] Explainable Risk Analysis
-- [ ] Document Verification
-- [ ] Geospatial Monitoring
+* Project monitoring
+* Financial analytics
+* Risk scoring
+* Anomaly-detection integration
+* Explainable risk indicators
+* Geospatial project monitoring
+* Data-driven project prioritization
+
+The backend contribution represented in this repository focuses primarily on the **API, data-processing, risk-analysis, and integration layer**.
 
 ---
 
 # 🔮 Future Scope
 
-- Satellite imagery analysis
-- Computer vision for physical verification
-- Mobile application for field inspectors
-- Real-time CCTV integration
-- Advanced contractor network analysis
-- Predictive project-delay detection
-- Automated alerts
-- SHAP-based explainability
-- Continuous model retraining
-- Government system integrations
+Potential future improvements include:
+
+* Integration with verified government datasets
+* Database-backed project management
+* Advanced anomaly-detection models
+* Predictive project-delay detection
+* Automated risk alerts
+* SHAP-based model explainability
+* Document verification
+* OCR-based document processing
+* Contractor network analysis
+* Geospatial intelligence
+* Satellite imagery analysis
+* Computer vision for physical verification
+* Mobile application for field inspectors
+* Integration with government systems
 
 ---
 
 # ⚠️ Responsible AI
 
-MPLADGuard-AI is a decision-support system.
+MPLADGuard AI is intended to function as a **decision-support system**.
 
-A high-risk project does NOT automatically mean that fraud has occurred.
+A high-risk score does **not** automatically mean that fraud, corruption, or wrongdoing has occurred.
 
-The system should report:
+The appropriate interpretation is:
 
-"Potential anomaly detected — requires investigation."
+> **Potential anomaly detected — requires human verification.**
 
 rather than:
 
-"Fraud confirmed."
+> **Fraud confirmed.**
 
-Final decisions must be made through appropriate human verification, audit, and due process.
+Any real-world investigation or administrative decision should involve appropriate human review, audit procedures, and due process.
 
 ---
 
@@ -474,14 +488,30 @@ Final decisions must be made through appropriate human verification, audit, and 
 
 **Problem Statement:** 26012
 
-**Project:** MPLADGuard-AI
+**Project:** MPLADGuard AI
 
-**Objective:** Use AI and data analytics to improve monitoring, anomaly detection, transparency, and efficiency in MPLADS implementation.
+**Objective:**
+Use data analytics and AI-assisted techniques to improve monitoring, transparency, anomaly identification, and efficiency in MPLADS implementation.
+
+This project was developed as part of our **Smart India Hackathon 2026** preparation and offline hackathon experience.
 
 ---
 
-## 🛡️ MPLADGuard-AI
+# 📌 Repository Note
+
+This repository is a **personal fork** of the MPLADGuard AI team project.
+
+It is maintained to showcase my individual backend development work and contribution to the project.
+
+For the team's main project and final integrated implementation, refer to the original team repository.
+
+---
+
+## 🛡️ MPLADGuard AI
 
 **AI-Assisted Monitoring for Transparent & Efficient Public Development**
 
-Made for SIH 2026.
+**Backend implementation by Rohan Jagdale**
+
+*Built as part of an SIH 2026 project.*
+
